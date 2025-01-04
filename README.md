@@ -7,7 +7,7 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-##Instrukcje uruchomienia aplikacji lokalnie
+## Instrukcje uruchomienia aplikacji lokalnie
 
 Uruchomić konsolę (cmd.exe) i przejść do katalogu:
 
@@ -32,7 +32,6 @@ Potem wykonać polecenie:
 Aby zainstalować brakujące pakiety w katalogu vendor, oraz, żeby działała autoryzacja Breeze należy wykonać polecenie:
 
 - npm install
-
 
 ## About Laravel
 
