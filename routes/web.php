@@ -27,4 +27,24 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::group(['middleware' => 'admin'], function(){
+    Route::get('admin/dashboard', function(){
+        return view('admin.dashboard');
+    });
+});
+
+Route::group(['middleware' => 'lecturer'], function(){
+    Route::get('lecturer/dashboard', function(){
+        return view('lecturer.dashboard');
+    });
+});
+
+    Route::group(['middleware' => 'student'], function(){
+        Route::get('student/dashboard', function(){
+            return view('student.dashboard');
+        });
+});
+
+//Route::get('/link',[YourController::class,'method'])->name('route.name')->middleware('admin');
+
 require __DIR__.'/auth.php';

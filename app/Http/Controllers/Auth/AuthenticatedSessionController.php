@@ -28,7 +28,18 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        if(Auth::user()->role =="0"){
+            return redirect('admin/dashboard');//->intended(route('admin/dashboard', absolute: false));
+        }
+        else if(Auth::user()->role=="1"){
+            return redirect('lecturer/dashboard');
+        }
+        else if(Auth::user()->role=="2"){
+            return redirect('student/dashboard');
+        }
+        else{
+            return redirect('/dashboard')->with('error','Brak koniecznych uprawnień. Poczekaj aż administrator przypisze cię do roli.');
+        }
     }
 
     /**
