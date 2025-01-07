@@ -18,6 +18,7 @@ class ProfileUpdateRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
+            'role'=> ['required', 'string', Rule::in(['0','1','2'])],
             'email' => [
                 'required',
                 'string',
