@@ -302,7 +302,7 @@ return [
         // Navbar items:
         [
             'type' => 'navbar-search',
-            'text' => 'szukaj',
+            'text' => 'search',
             'topnav_right' => false,
         ],
         [
@@ -319,13 +319,13 @@ return [
             'text' => 'blog',
             'url' => 'admin/blog',
             'can' => 'manage-blog',
+            'label' => 3,
+            'label_color' => 'success',
         ],
         [
             'text' => 'Przedmioty',
-            'url' => 'przedmioty',
+            'url' => 'subjects/addSubject',
             'icon' => 'far fa-fw fa-file',
-            'label' => 3,
-            'label_color' => 'success',
         ],
         ['header' => 'USTAWIENIA'],
         [
