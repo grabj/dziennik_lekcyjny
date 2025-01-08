@@ -64,9 +64,9 @@ return [
     */
 
     'logo' => 'Dziennik lekcyjny online',
-    'logo_img' => null,
+    'logo_img' => '',
     'logo_img_class' => 'brand-image img-circle elevation-3',
-    'logo_img_xl' => null,
+    //'logo_img_xl' => 'public/school-256.png',
     'logo_img_xl_class' => 'brand-image-xs',
     'logo_img_alt' => '',
 
@@ -86,7 +86,7 @@ return [
     'auth_logo' => [
         'enabled' => false,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => '',
             'alt' => 'Auth Logo',
             'class' => '',
             'width' => 50,
@@ -110,10 +110,10 @@ return [
     */
 
     'preloader' => [
-        'enabled' => false,
+        'enabled' => true,
         'mode' => 'fullscreen',
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => 'public/school-256.png',
             'alt' => 'Preloader Image',
             'effect' => 'animation__shake',
             'width' => 60,
@@ -171,7 +171,7 @@ return [
     |
     */
 
-    'classes_auth_card' => 'card-outline card-primary',
+    'classes_auth_card' => '',
     'classes_auth_header' => '',
     'classes_auth_body' => '',
     'classes_auth_footer' => '',
@@ -198,7 +198,7 @@ return [
     'classes_content' => '',
     'classes_sidebar' => 'sidebar-dark-primary elevation-4',
     'classes_sidebar_nav' => '',
-    'classes_topnav' => 'navbar-white navbar-light',
+    'classes_topnav' => 'navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
     'classes_topnav_container' => 'container',
 
@@ -298,6 +298,7 @@ return [
     |
     */
 
+
     'menu' => [
         // Navbar items:
         [
@@ -310,72 +311,89 @@ return [
             'topnav_right' => true,
         ],
 
-        // Sidebar items:
+/*        // Sidebar items:
         [
             'type' => 'sidebar-menu-search',
             'text' => 'szukaj',
-        ],
+        ],*/
+        ['header' => 'MENU'],
         [
-            'text' => 'blog',
-            'url' => 'admin/blog',
-            'can' => 'manage-blog',
-            'label' => 3,
-            'label_color' => 'success',
+            'text' => 'Użytkownicy',
+            'icon' => 'fas fa-fw fa-users',
+            'can' => ['0'], //AppServiceProvider do zarządzania widocznością dla ról
+            'submenu' => [
+                [
+                    'text' => 'Dodaj',
+                    'url' => 'users/add',
+                    'icon' => 'fas fa-fw fa-plus',
+                ],
+                [
+                    'text' => 'Lista',
+                    'url' => 'subjects/list',
+                    'icon' => 'fas fa-fw fa-list',
+                ],
+            ],
         ],
         [
             'text' => 'Przedmioty',
-            'url' => 'subjects/addSubject',
-            'icon' => 'far fa-fw fa-file',
+            'icon' => 'fas fa-fw fa-chalkboard',
+            'can' => ['0'], //AppServiceProvider do zarządzania widocznością
+            'submenu' => [
+                [
+                    'text' => 'Dodaj',
+                    'url' => 'subjects/addSubject',
+                    'icon' => 'fas fa-fw fa-plus',
+                ],
+                [
+                    'text' => 'Lista',
+                    'url' => 'subjects/listSubjects',
+                    'icon' => 'fas fa-fw fa-list',
+                ],
+            ],
+        ],
+        [
+            'text' => 'Przedmioty',
+            'url' => 'subjects/listSubjects',
+            'icon' => 'fas fa-fw fa-',
+            'can' => ['1','2']
+        ],
+        [
+            'text' => 'Oceny',
+            'icon' => 'fas fa-fw fa-spell-check',
+            'can' => ['0','1'], //AppServiceProvider do zarządzania widocznością
+            'submenu' => [
+                [
+                    'text' => 'Dodaj',
+                    'url' => 'grades/add',
+                    'icon' => 'fas fa-fw fa-plus',
+                ],
+                [
+                    'text' => 'Lista',
+                    'url' => 'grades/list',
+                    'icon' => 'fas fa-fw fa-list',
+                ],
+            ],
+        ],
+        [
+            'text' => 'Oceny',
+            'url' => 'grades/list',
+            'icon' => 'fas fa-fw fa-ranking-star',
+            'can' => ['2']
         ],
         ['header' => 'USTAWIENIA'],
         [
             'text' => 'Profil',
             'url' => 'profile',
-            'icon' => 'fas fa-fw fa-user',
+            'icon' => 'fas fa-fw fa-user-graduate',
+            'can' => ['0','1','2']
         ],
-        [
-            'text' => 'multilevel',
-            'icon' => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                        ],
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-            ],
-        ],
-        ['header' => 'labels'],
+/*        ['header' => 'labels'],
         [
             'text' => 'important',
             'icon_color' => 'red',
             'url' => '#',
+            'label' => 3,
+            'label_color' => 'success',
         ],
         [
             'text' => 'warning',
@@ -386,7 +404,7 @@ return [
             'text' => 'information',
             'icon_color' => 'cyan',
             'url' => '#',
-        ],
+        ],*/
     ],
 
     /*

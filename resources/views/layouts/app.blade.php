@@ -39,6 +39,12 @@
         @endif
     @stop
 
+    {{-- Setup Custom Preloader Content --}}
+
+    @section('preloader')
+        <i class="fas fa-3x fa-spin fa-hourglass text-secondary"></i>
+    @stop
+
     {{-- Rename section content to content_body --}}
 
     @section('content')
@@ -52,11 +58,10 @@
             Version: {{ config('app.version', '1.0.0') }}
         </div>
 
-        <strong>
-            <a href="{{ config('app.company_url', '#') }}">
-                {{ config('app.company_name', 'My school') }}
-            </a>
-        </strong>
+        <a href="{{ config('app.company_url', '#') }}">
+            {{ config('app.company_name', 'My school') }}
+        </a>
+
     @stop
 
     {{-- Add common Javascript/Jquery code --}}
@@ -77,14 +82,11 @@
         <style type="text/css">
 
             {{-- You can add AdminLTE customizations here --}}
-/*
-    .card-header {
-        border-bottom: none;
+
+    .small-box {
+        font-weight: 500;
+        color: #1b1e21;
     }
-    .card-title {
-        font-weight: 600;
-    }
-    */
 
         </style>
     @endpush
