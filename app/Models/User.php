@@ -41,4 +41,11 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    //zwróć użytkowników do tabeli
+    static public function getUsers(){
+        return self::select('users.*')
+                        ->orderBy('id','asc')
+                        ->get();
+    }
 }

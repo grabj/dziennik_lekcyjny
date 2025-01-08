@@ -324,12 +324,12 @@ return [
             'submenu' => [
                 [
                     'text' => 'Dodaj',
-                    'url' => 'users/add',
+                    'url' => 'admin/users/add',
                     'icon' => 'fas fa-fw fa-plus',
                 ],
                 [
                     'text' => 'Lista',
-                    'url' => 'subjects/list',
+                    'url' => 'admin/users/list',
                     'icon' => 'fas fa-fw fa-list',
                 ],
             ],
@@ -341,19 +341,19 @@ return [
             'submenu' => [
                 [
                     'text' => 'Dodaj',
-                    'url' => 'subjects/addSubject',
+                    'url' => 'subjects/add',
                     'icon' => 'fas fa-fw fa-plus',
                 ],
                 [
                     'text' => 'Lista',
-                    'url' => 'subjects/listSubjects',
+                    'url' => 'subjects/list',
                     'icon' => 'fas fa-fw fa-list',
                 ],
             ],
         ],
         [
             'text' => 'Przedmioty',
-            'url' => 'subjects/listSubjects',
+            'url' => 'subjects/list',
             'icon' => 'fas fa-fw fa-',
             'can' => ['1','2']
         ],

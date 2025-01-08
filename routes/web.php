@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubjectController;
@@ -10,10 +11,10 @@ Route::get('/welcome', function () {
 });
 
 //Route::get('/subjects', [SubjectController::class, 'addSubject'])->name('subjects.addSubject');
-Route::view('/subjects', 'subjects.addSubject');
+//Route::view('subjects/addSubject', 'addSubject');
 //Route::post('/subjects', [SubjectController::class, 'addSubject']);
-
 //Route::get('/subjects/editSubject', 'subjects.editSubject');
+//Route::resource('subjects', SubjectController::class);
 
 Route::get('/', function () {
     return view('dashboard');
@@ -29,7 +30,10 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::group(['middleware' => 'admin'], function(){
-    Route::get('admin/dashboard', [DashboardController::class, 'dashboard']);
+    Route::get('/admin/dashboard', [DashboardController::class, 'dashboard']);
+    Route::get('/admin/users/list', [AdminController::class, 'listUsers'])->name('admin.users.list');
+    Route::get('/admin/users/add', [AdminController::class, 'addUser'])->name('admin.users.add');
+    Route::post("/admin/users/add", [AdminController::class, 'storeUser'])->name('admin.users.store');;
 });
 
 Route::group(['middleware' => 'lecturer'], function(){
