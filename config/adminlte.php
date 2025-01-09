@@ -334,7 +334,7 @@ return [
                 ],
             ],
         ],
-        [
+/*        [
             'text' => 'Przedmioty',
             'icon' => 'fas fa-fw fa-chalkboard',
             'can' => ['0'], //AppServiceProvider do zarządzania widocznością
@@ -356,28 +356,45 @@ return [
             'url' => 'subjects/list',
             'icon' => 'fas fa-fw fa-',
             'can' => ['1','2']
-        ],
+        ],*/
         [
             'text' => 'Oceny',
             'icon' => 'fas fa-fw fa-spell-check',
-            'can' => ['0','1'], //AppServiceProvider do zarządzania widocznością
+            'can' => ['1'], //AppServiceProvider do zarządzania widocznością
             'submenu' => [
                 [
                     'text' => 'Dodaj',
-                    'url' => 'grades/add',
+                    'url' => 'lecturer/grades/add',
                     'icon' => 'fas fa-fw fa-plus',
                 ],
                 [
                     'text' => 'Lista',
-                    'url' => 'grades/list',
+                    'url' => 'lecturer/grades/list',
                     'icon' => 'fas fa-fw fa-list',
                 ],
             ],
         ],
         [
             'text' => 'Oceny',
-            'url' => 'grades/list',
-            'icon' => 'fas fa-fw fa-ranking-star',
+            'icon' => 'fas fa-fw fa-spell-check',
+            'can' => ['0'], //AppServiceProvider do zarządzania widocznością
+            'submenu' => [
+                [
+                    'text' => 'Dodaj',
+                    'url' => 'admin/grades/add',
+                    'icon' => 'fas fa-fw fa-plus',
+                ],
+                [
+                    'text' => 'Lista',
+                    'url' => 'admin/grades/list',
+                    'icon' => 'fas fa-fw fa-list',
+                ],
+            ],
+        ],
+        [
+            'text' => 'Oceny',
+            'url' => 'student/grades/list',
+            'icon' => 'fas fa-fw fa-spell-check',
             'can' => ['2']
         ],
         ['header' => 'USTAWIENIA'],

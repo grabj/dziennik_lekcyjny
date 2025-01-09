@@ -18,7 +18,7 @@ class DashboardController extends Controller
             return view('student/dashboard');
         }
         else{
-            return view('/dashboard')->with('error','Brak koniecznych uprawnień. Poczekaj aż administrator przypisze cię do roli.');
+            return view('/dashboard')->with('message','Brak koniecznych uprawnień. Poczekaj aż administrator przypisze cię do roli.');
         }
     }
 }

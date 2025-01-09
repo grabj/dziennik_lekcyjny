@@ -25,6 +25,13 @@
             <div class="card-header">
                 <h3 class="card-title">Formularz dodawania</h3>
             </div>
+
+            @if(Session::has('message'))
+                <div class="alert alert-default-dark m-3">
+                    {{Session::get('message')}}
+                </div>
+            @endif
+
             <!-- /.card-header -->
             <div class="card-body">
                 <form method="post" action="{{route('admin.users.store')}}" >

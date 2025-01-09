@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+//panel admina
 Route::group(['middleware' => 'admin'], function(){
     Route::get('/admin/dashboard', [DashboardController::class, 'dashboard']);
 
@@ -40,6 +41,11 @@ Route::group(['middleware' => 'admin'], function(){
     Route::post('/admin/users/edit/{id}', [AdminController::class, 'updateUser']);
     Route::get('/admin/users/delete/{id}', [AdminController::class, 'deleteUser'])->name('admin.users.delete');
     Route::delete('/admin/users/delete/{id}', [AdminController::class, 'deleteUserReally']);
+
+    //działania na ocenach
+    Route::get('/admin/grades/list', [AdminController::class, 'listGrades'])->name('admin.grades.list');
+    Route::get('/admin/grades/add', [AdminController::class, 'addGrade'])->name('admin.grades.add');
+    Route::post("/admin/grades/add", [AdminController::class, 'storeGrade'])->name('admin.grades.store');
 });
 
 Route::group(['middleware' => 'lecturer'], function(){
