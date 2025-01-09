@@ -14,7 +14,7 @@
 
         @if ($errors->any())
             <div class="alert alert-danger m-1">
-                Uzupełnij brakujące pola:
+                <p>Uzupełnij pola poprawiając następujące błędy:</p>
                 @foreach ($errors->all() as $error)
                     <p>{{$error}}</p>
                 @endforeach
