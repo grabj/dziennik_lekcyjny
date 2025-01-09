@@ -33,6 +33,26 @@ Aby zainstalować brakujące pakiety w katalogu vendor, oraz, żeby działała a
 
 - npm install
 
+Utworzyć właściwą bazę danych w phpMyAdmin i wywołać polecenie:
+
+- php artisan migrate
+
+By użyć fabryki mockowych danych należy wpisać w konsoli:
+
+- php artisan db:seed
+
+W przypadku błędów podczas migracji lub w bazie danych użyć:
+
+- php artisan migrate:fresh
+
+By uruchomić lokalny serwer użyć polecenia:
+
+- php artisan serve
+
+oraz
+
+- npm run dev
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
