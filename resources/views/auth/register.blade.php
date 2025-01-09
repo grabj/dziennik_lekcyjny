@@ -26,7 +26,8 @@
 
         <!-- Role -->
         <div class="mt-4">
-            <input type="hidden" name="lecturer_id" id="lecturer_id" value="">
+            <input type="hidden" name="role" id="role" value="unsigned">
+            <x-input-error :messages="$errors->get('role')" class="mt-2" />
         </div>
 
         <!-- Email Address -->
