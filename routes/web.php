@@ -31,9 +31,15 @@ Route::middleware('auth')->group(function () {
 
 Route::group(['middleware' => 'admin'], function(){
     Route::get('/admin/dashboard', [DashboardController::class, 'dashboard']);
+
+    //działania na użytkownikach
     Route::get('/admin/users/list', [AdminController::class, 'listUsers'])->name('admin.users.list');
     Route::get('/admin/users/add', [AdminController::class, 'addUser'])->name('admin.users.add');
-    Route::post("/admin/users/add", [AdminController::class, 'storeUser'])->name('admin.users.store');;
+    Route::post("/admin/users/add", [AdminController::class, 'storeUser'])->name('admin.users.store');
+    Route::get('/admin/users/edit/{id}', [AdminController::class, 'editUser']);
+    Route::post('/admin/users/edit/{id}', [AdminController::class, 'updateUser']);
+    Route::get('/admin/users/delete/{id}', [AdminController::class, 'deleteUser'])->name('admin.users.delete');
+    Route::delete('/admin/users/delete/{id}', [AdminController::class, 'deleteUserReally']);
 });
 
 Route::group(['middleware' => 'lecturer'], function(){

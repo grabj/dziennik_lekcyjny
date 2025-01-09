@@ -34,7 +34,7 @@
                                         <th>Rola</th>
                                         <th>Data utworzenia</th>
                                         <th>Data aktualizacji</th>
-                                        <th>Akcje</th>
+                                        <th class="col-1">Akcje</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -44,10 +44,17 @@
                                                 <td>{{$value->name}}</td>
                                                 <td>{{$value->surname}}</td>
                                                 <td>{{$value->email}}</td>
-                                                <td>{{$value->role}}</td>
+                                                <td>
+                                                    {{$value->role === "0" ? "Admin" : "" }}
+                                                    {{$value->role === "1" ? "Lecturer" : "" }}
+                                                    {{$value->role === "2" ? "Student" : "" }}
+                                                </td>
                                                 <td>{{$value->created_at}}</td>
                                                 <td>{{$value->updated_at}}</td>
-                                                <td></td>
+                                                <td >
+                                                    <a href="{{url('admin/users/edit/'.$value->id)}}" class="btn btn-info btn-sm"><i class='fas fa-marker'></i></a>
+                                                    <a href="{{url('admin/users/delete/'.$value->id)}}" class="btn btn-danger btn-sm"><i class='fas fa-trash'></i></a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>

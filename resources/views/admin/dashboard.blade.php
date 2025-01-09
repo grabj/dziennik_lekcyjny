@@ -3,7 +3,7 @@
 {{-- Customize layout sections --}}
 
 @section('subtitle', 'Strona główna')
-@section('content_header_title', 'Panel administratora')
+@section('content_header_title', 'Panel Administratora')
 @section('content_header_subtitle', 'Widok główny')
 
 {{-- Content body: main page content --}}

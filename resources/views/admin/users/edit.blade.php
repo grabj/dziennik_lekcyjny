@@ -4,7 +4,7 @@
 
 @section('subtitle', 'Admin')
 @section('content_header_title', 'Panel Administratora')
-@section('content_header_subtitle', 'Dodaj użytkownika')
+@section('content_header_subtitle', 'Edytuj użytkownika')
 
 {{-- Content body: main page content --}}
 
@@ -23,39 +23,39 @@
 
         <div class="card col col-md-10 col-xl-8 container-fluid">
             <div class="card-header">
-                <h3 class="card-title">Formularz dodawania</h3>
+                <h3 class="card-title">Formularz edycji</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <form method="post" action="{{route('admin.users.store')}}" >
+                <form method="post" action="" >
                     @csrf
                     <div class="row">
                         <div class="col-sm-12">
                             <!-- Email Address -->
                             <div>
                                 <x-input-label for="email" :value="__('Email')" />
-                                <x-text-input id="email" class="block mt-1 w-full bg-white" type="email" name="email" :value="old('email')" required autocomplete="username" />
+                                <x-text-input id="email" class="block mt-1 w-full bg-white" type="email" name="email" value="{{$getUsers->email}}" required autocomplete="username" />
                                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
                             </div>
                             <!-- name -->
                             <div class="mt-4">
                                 <x-input-label for="name" :value="__('Imię')" />
-                                <x-text-input id="name" class="block mt-1 w-full bg-white" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+                                <x-text-input id="name" class="block mt-1 w-full bg-white" type="text" name="name" value="{{$getUsers->name}}" required autofocus autocomplete="name" />
                                 <x-input-error :messages="$errors->get('name')" class="mt-2" />
                             </div>
                             <!-- Surname -->
                             <div class="mt-4">
                                 <x-input-label for="surname" :value="__('Nazwisko')" />
-                                <x-text-input id="surname" class="block mt-1 w-full bg-white" type="text" name="surname" :value="old('surname')" required autofocus autocomplete="surname" />
+                                <x-text-input id="surname" class="block mt-1 w-full bg-white" type="text" name="surname" value="{{$getUsers->surname}}" required autofocus autocomplete="surname" />
                                 <x-input-error :messages="$errors->get('surname')" class="mt-2" />
                             </div>
                             <!-- Role -->
                             <div class="mt-4 form-group">
                                 <label for="role">Rola</label>
                                 <select class="form-control block" id="role" name="role" required autofocus>
-                                    <option value="2">Student</option>
-                                    <option value="1">Lecturer</option>
-                                    <option value="0">Admin</option>
+                                    <option value="2" <?= isSelected("2", $getUsers->role); ?> >Student</option>
+                                    <option value="1" <?= isSelected("1", $getUsers->role); ?> >Lecturer</option>
+                                    <option value="0" <?= isSelected("0", $getUsers->role); ?> >Admin</option>
                                 </select>
                                 <x-input-error :messages="$errors->get('role')" class="mt-2" />
                             </div>
@@ -65,7 +65,7 @@
                                 <x-text-input id="password" class="block mt-1 w-full bg-white"
                                               type="password"
                                               name="password"
-                                              required autocomplete="new-password" />
+                                              autocomplete="new-password" placeholder="Wpisz nowe hasło, jeżeli chcesz je zmienić..."/>
                                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
                             </div>
                             <x-adminlte-button type="submit" value="submit" theme="info" label="Zaakceptuj" autofocus/>
@@ -77,4 +77,11 @@
         </div>
     </div>
 @stop
-
+<?php
+function isSelected($selectName, $value) {
+    if(isset($value)) {
+        if($selectName == $value) return 'selected';
+    }
+    return false;
+}
+?>
