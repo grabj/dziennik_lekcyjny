@@ -2,26 +2,18 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LecturerController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use Illuminate\Support\Facades\Route;
-
-Route::get('/welcome', function () {
-    return view('welcome');
-});
-
-//Route::get('/subjects', [SubjectController::class, 'addSubject'])->name('subjects.addSubject');
-//Route::view('subjects/addSubject', 'addSubject');
-//Route::post('/subjects', [SubjectController::class, 'addSubject']);
-//Route::get('/subjects/editSubject', 'subjects.editSubject');
-//Route::resource('subjects', SubjectController::class);
 
 Route::get('/', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-/*Route::get('/dashboard', function () {
+Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');*/
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -30,6 +22,7 @@ Route::middleware('auth')->group(function () {
 });
 
 //panel admina
+
 Route::group(['middleware' => 'admin'], function(){
     Route::get('/admin/dashboard', [DashboardController::class, 'dashboard']);
 
@@ -46,14 +39,29 @@ Route::group(['middleware' => 'admin'], function(){
     Route::get('/admin/grades/list', [AdminController::class, 'listGrades'])->name('admin.grades.list');
     Route::get('/admin/grades/add', [AdminController::class, 'addGrade'])->name('admin.grades.add');
     Route::post("/admin/grades/add", [AdminController::class, 'storeGrade'])->name('admin.grades.store');
+    Route::get('/admin/grades/delete/{id}', [AdminController::class, 'deleteGrade'])->name('admin.grades.delete');
+    Route::delete('/admin/grades/delete/{id}', [AdminController::class, 'deleteGradeReally']);
 });
 
+//panel nauczyciela
+
 Route::group(['middleware' => 'lecturer'], function(){
-    Route::get('lecturer/dashboard', [DashboardController::class, 'dashboard']);
+    Route::get('/lecturer/dashboard', [DashboardController::class, 'dashboard']);
+
+    //działania na ocenach
+    Route::get('/lecturer/grades/list', [LecturerController::class, 'listGrades'])->name('lecturer.grades.list');
+    Route::get('/lecturer/grades/add', [LecturerController::class, 'addGrade'])->name('lecturer.grades.add');
+    Route::post("/lecturer/grades/add", [LecturerController::class, 'storeGrade'])->name('lecturer.grades.store');
+    Route::get('/lecturer/grades/list/invalid/{id}', [LecturerController::class, 'invalidGrade'])->name('lecturer.grades.invalid');
 });
+
+//panel ucznia
 
 Route::group(['middleware' => 'student'], function(){
     Route::get('student/dashboard', [DashboardController::class, 'dashboard']);
+
+    //działania na ocenach
+    Route::get('/student/grades/list', [StudentController::class, 'listGrades'])->name('student.grades.list');
 });
 
 

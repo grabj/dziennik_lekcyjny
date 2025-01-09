@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GradeStoreRequest;
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\Grade;
 use App\Models\User;
@@ -16,6 +18,8 @@ use Illuminate\Validation\Rule;
 
 class AdminController extends Controller
 {
+    //OCENY
+
     public function listGrades(){
         $data['getGrades'] = Grade::getGrades();
         return view('admin.grades.list', $data);
@@ -23,14 +27,30 @@ class AdminController extends Controller
     public function addGrade(){
         return view('admin.grades.add');
     }
-    //zrobić walidacje
-    public function storeGrade(Request $request) : RedirectResponse
+    public function storeGrade(GradeStoreRequest $request) : RedirectResponse
     {
         $grade = new Grade();
-        $grade->is_valid = 1;
         $grade->create($request->all());
         return redirect('admin/grades/add')->with('message','Pomyślnie dodano ocenę.');
     }
+    public function deleteGrade($id)
+    {
+        $data['getGrade']= Grade::getSingle($id);
+        $data['id']=$id;
+        if(!empty($data['getGrade'])){
+            return view('admin.grades.delete', $data);
+        }else{
+            return redirect('admin/grades/list')->with('message','Nie udało usunąć się oceny.');
+        }
+    }
+    public function deleteGradeReally($data) : RedirectResponse
+    {
+        $grade = User::getSingle($data);
+        $grade->delete();
+        return redirect('admin/grades/list')->with('message','Pomyślnie usunięto ocenę.');
+    }
+
+    //UŻYTKOWNICY
 
     public function listUsers(){
         $data['getUsers'] = User::getUsers();
@@ -39,11 +59,10 @@ class AdminController extends Controller
     public function addUser(){
         return view('admin.users.add');
     }
-    public function storeUser(UserUpdateRequest $request) : RedirectResponse
+    public function storeUser(UserStoreRequest $request) : RedirectResponse
     {
         //dd($request->all());
         $user = new User();
-        //$request->merge(['user_id' => Auth::user()->id]);
         $user->create($request->all());
         return redirect('admin/users/add')->with('message','Pomyślnie utworzono użytkownika');
     }
@@ -58,28 +77,16 @@ class AdminController extends Controller
     public function updateUser($id, UserUpdateRequest $request): RedirectResponse
     {
         $user = User::getSingle($id);
-
-        $active_email=$user->email;
-
         $user->name=trim($request->name);
         $user->surname=trim($request->surname);
+        $user->email = trim($request->email);
         $user->role=trim($request->role);
         if(!empty($request->password)){
             $user->password = Hash::make($request->password);
         }
-        if($request->email!=null){
-            $user->email = $request->email;
-            //żeby nie krzyczał że email musi być unikalny
-            if($user->email==$active_email){
-                request()->validate([
-                    'email' =>  Rule::unique(User::class)->ignore($user->id)
-                ]);
-            }
-        }else{
-            $user->email = $active_email;
-        }
+        $request->merge(['user_id' => $user->id]);
 
-        $user->insert();
+        $user->update();
 
         return redirect('admin/users/list')->with('message','Pomyślnie zaktualizowano użytkownika');
     }

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('mark');
             $table->foreignId('student_id')->index();
-            $table->foreignId('lecturer_id')->index();
+            $table->foreignId('lecturer_id')->index()->nullable();
             $table->string('subject');
             $table->boolean('is_valid');
             $table->string('description')->nullable();

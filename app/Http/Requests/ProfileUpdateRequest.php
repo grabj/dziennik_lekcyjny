@@ -18,7 +18,7 @@ class ProfileUpdateRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255', 'min:2'],
             'surname' => ['required', 'string', 'max:255', 'min:2'],
-            'role'=> ['required', 'string', Rule::in(['0','1','2'])],
+            //'role'=> ['required', 'string', Rule::in(['0','1','2'])],
             'email' => [
                 'required',
                 'string',
@@ -27,7 +27,6 @@ class ProfileUpdateRequest extends FormRequest
                 'max:255',
                 Rule::unique(User::class)->ignore($this->user()->id),
             ],
-            //'password' => 'required|min:6',
         ];
     }
 }

@@ -5,7 +5,7 @@
         </h2>
 
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            {{ __("Zaktualizuj swoje dane.") }}
+            {{ __("Twoje dane:") }}
         </p>
     </header>
 
@@ -20,28 +20,21 @@
         <div>
             <x-input-label for="name" :value="__('Name')"/>
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)"
-                          required autofocus autocomplete="name"/>
+                          disabled autocomplete="name"/>
             <x-input-error class="mt-2" :messages="$errors->get('name')"/>
         </div>
 
         <div>
             <x-input-label for="surname" :value="__('Surname')"/>
             <x-text-input id="surname" name="surname" type="text" class="mt-1 block w-full"
-                          :value="old('surname', $user->surname)" required autofocus autocomplete="surname"/>
+                          :value="old('surname', $user->surname)" disabled autocomplete="surname"/>
             <x-input-error class="mt-2" :messages="$errors->get('surname')"/>
-        </div>
-
-        <div>
-            <x-input-label for="role" :value="__('Role')"/>
-            <x-text-input id="role" name="role" type="text" class="mt-1 block w-full" :value="old('role', $user->role)"
-                          required autofocus autocomplete="role"/>
-            <x-input-error class="mt-2" :messages="$errors->get('role')"/>
         </div>
 
         <div>
             <x-input-label for="email" :value="__('Email')"/>
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full"
-                          :value="old('email', $user->email)" required autocomplete="username"/>
+                          :value="old('email', $user->email)" required disabled autocomplete="username"/>
             <x-input-error class="mt-2" :messages="$errors->get('email')"/>
 
             @if ($user instanceof MustVerifyEmail && ! $user->hasVerifiedEmail())
@@ -64,7 +57,7 @@
             @endif
         </div>
 
-        <div class="flex items-center gap-4">
+{{--        <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Zapisz') }}</x-primary-button>
 
             @if (session('status') === 'profile-updated')
@@ -76,6 +69,6 @@
                         class="text-lg-center text-gray-600 dark:text-gray-400"
                 >{{ __('Zapisano.') }}</p>
             @endif
-        </div>
+        </div>--}}
     </form>
 </section>

@@ -9,16 +9,16 @@ class DashboardController extends Controller
 {
     public function dashboard(){
         if(Auth::user()->role =="0"){
-            return view('admin/dashboard');
+            return view('/admin/dashboard');
         }
         else if(Auth::user()->role=="1"){
-            return view('lecturer/dashboard');
+            return view('/lecturer/dashboard');
         }
         else if(Auth::user()->role=="2"){
-            return view('student/dashboard');
+            return view('/student/dashboard');
         }
         else{
-            return view('/dashboard')->with('message','Brak koniecznych uprawnień. Poczekaj aż administrator przypisze cię do roli.');
+            return view('/register')->with('message','Brak koniecznych uprawnień. Poczekaj aż administrator przypisze cię do roli.');
         }
     }
 }

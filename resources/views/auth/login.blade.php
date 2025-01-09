@@ -1,4 +1,12 @@
 <x-guest-layout>
+    @if ($errors->any())
+        <div class="alert alert-danger m-1">
+            <p>Uzupełnij pola poprawiając następujące błędy:</p>
+            @foreach ($errors->all() as $error)
+                <p>{{$error}}</p>
+            @endforeach
+        </div>
+    @endif
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 

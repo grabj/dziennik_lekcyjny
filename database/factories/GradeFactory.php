@@ -17,9 +17,9 @@ class GradeFactory extends Factory
     public function definition(): array
     {
         return [
-            'mark' => fake()->randomElement($array=['2', '3', '3.5', '4', '4.5', '5']),
-            'student_id' => fake()->numberBetween(6,13),
-            'lecturer_id' => fake()->numberBetween(2,5),
+            'mark' => fake()->randomElement($array=['2.0', '3.0', '3.5', '4.0', '4.5', '5.0']),
+            'student_id' => fake()->numberBetween(2,40),
+            'lecturer_id' => fake()->numberBetween(2,40),
             'subject' => fake()->randomLetter,
             'description'=>null,
             'is_valid'=>true

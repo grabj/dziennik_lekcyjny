@@ -1,4 +1,12 @@
 <x-guest-layout>
+    @if ($errors->any())
+        <div class="alert alert-danger m-1">
+            <p>Uzupełnij pola poprawiając następujące błędy:</p>
+            @foreach ($errors->all() as $error)
+                <p>{{$error}}</p>
+            @endforeach
+        </div>
+    @endif
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
@@ -18,9 +26,7 @@
 
         <!-- Role -->
         <div class="mt-4">
-            <x-input-label for="role" :value="__('Rola')" />
-            <x-text-input id="role" class="block mt-1 w-full" type="text" name="role" :value="old('role')" required autofocus autocomplete="role" />
-            <x-input-error :messages="$errors->get('role')" class="mt-2" />
+            <input type="hidden" name="lecturer_id" id="lecturer_id" value="">
         </div>
 
         <!-- Email Address -->

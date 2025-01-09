@@ -2,8 +2,8 @@
 
 {{-- Customize layout sections --}}
 
-@section('subtitle', 'Admin')
-@section('content_header_title', 'Panel Administratora')
+@section('subtitle', 'Lecturer')
+@section('content_header_title', 'Oceny')
 @section('content_header_subtitle', 'Dodaj ocenę')
 
 {{-- Content body: main page content --}}
@@ -34,26 +34,28 @@
 
             <!-- /.card-header -->
             <div class="card-body">
-                <form method="post" action="{{route('admin.grades.store')}}" >
+                <form method="post" action="{{route('lecturer.grades.store')}}" >
                     @csrf
                     <div class="row">
                         <div class="col-sm-12">
                             <!-- student_id -->
                             <div>
-                                <x-input-label for="student_id" :value="__('ID studenta')" />
-                                <x-text-input id="student_id" class="block mt-1 w-full bg-white" type="text" name="student_id" :value="old('student_id')" required autofocus/>
+                                <label for="student_id">Wybór studenta</label>
+                                <select id="student_id" name="student_id" class="block mt-1 w-full bg-white" required autofocus>
+                                    <option value="" disabled selected>Wybierz...</option>
+                                    @foreach($students as $student)
+                                        <option value="{{ $student->id }}">[{{ $student->id }}] {{ $student->name }} {{ $student->surname }}</option>
+                                    @endforeach
+                                </select>
                                 <x-input-error :messages="$errors->get('student_id')" class="mt-2" />
                             </div>
                             <!-- lecturer_id -->
-                            <div class="mt-4">
-                                <x-input-label for="lecturer_id" :value="__('ID nauczyciela')" />
-                                <x-text-input id="lecturer_id" class="block mt-1 w-full bg-white" type="text" name="lecturer_id" :value="old('lecturer_id')" required autofocus />
-                                <x-input-error :messages="$errors->get('lecturer_id')" class="mt-2" />
-                            </div>
+                            <input type="hidden" name="lecturer_id" id="lecturer_id" value="{{ $lecturer_id }}">
                             <!-- Mark -->
                             <div class="mt-4 form-group">
                                 <label for="mark">Ocena</label>
                                 <select class="form-control block" id="mark" name="mark" required autofocus>
+                                    <option value="" disabled selected>Wybierz...</option>
                                     <option>2.0</option>
                                     <option>3.0</option>
                                     <option>3.5</option>

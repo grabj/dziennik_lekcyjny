@@ -18,15 +18,8 @@ class UserUpdateRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255', 'min:2'],
             'surname' => ['required', 'string', 'max:255', 'min:2'],
-            'role'=> ['required', 'string', Rule::in(['0','1','2'])],
-            'email' => [
-                'string',
-                'lowercase',
-                'email',
-                'max:255',
-                Rule::unique(User::class),
-            ],
-            'password' => 'min:6',
+            //'role'=> ['required', 'string', Rule::in(['0','1','2'])],
+            'email' =>  'required|string|lowercase|max:255|email'
         ];
     }
 }

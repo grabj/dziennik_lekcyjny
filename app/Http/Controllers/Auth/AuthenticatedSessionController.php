@@ -29,7 +29,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         if(Auth::user()->role =="0"){
-            return redirect('admin/dashboard');//->intended(route('admin/dashboard', absolute: false));
+            return redirect('admin/dashboard');
         }
         else if(Auth::user()->role=="1"){
             return redirect('lecturer/dashboard');
@@ -37,8 +37,11 @@ class AuthenticatedSessionController extends Controller
         else if(Auth::user()->role=="2"){
             return redirect('student/dashboard');
         }
-        else{
-            return redirect('/dashboard')->with('error','Brak koniecznych uprawnień. Poczekaj aż administrator przypisze cię do roli.');
+        else if(Auth::user()->role==""){
+            return redirect('/login')->with('message','Brak koniecznych uprawnień. Poczekaj aż administrator przypisze cię do roli.');
+        }
+        else {
+            return redirect('/register')->with('message','Brak uprawnień.');
         }
     }
 
