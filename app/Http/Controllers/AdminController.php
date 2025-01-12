@@ -45,7 +45,7 @@ class AdminController extends Controller
     }
     public function deleteGradeReally($data) : RedirectResponse
     {
-        $grade = User::getSingle($data);
+        $grade = Grade::getSingle($data);
         $grade->delete();
         return redirect('admin/grades/list')->with('message','Pomyślnie usunięto ocenę.');
     }
