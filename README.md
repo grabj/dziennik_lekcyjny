@@ -17,7 +17,7 @@ By sklonować repozytorium należy wykonać polecenie:
 
 - git clone https://github.com/grabj/dziennik_lekcyjny.git
 
-lub
+lub:
 
 - git clone https://github.com/grabj/dziennik_lekcyjny.git <nazwa_katalogu>
 
@@ -49,9 +49,46 @@ By uruchomić lokalny serwer użyć polecenia:
 
 - php artisan serve
 
-oraz
+oraz:
 
 - npm run dev
+
+## Opis projektu
+Aplikacja "Dziennik lekcyjny" to system zarządzania danymi uczniów i nauczycieli, umożliwiający prowadzenie ewidencji ocen, zarządzanie użytkownikami oraz kontrolę dostępu na podstawie poziomu uprawnień. System wspiera administratorów, nauczycieli i uczniów, zapewniając przejrzysty podział funkcji i bezpieczeństwo danych. Dla każdej roli istnieje spersonalizowany interfejs.
+
+### Funkcjonalności
+1. System rejestracji i logowania
+    - Użytkownicy mogą zakładać konta, lecz przypisywanie ról (student, lecturer, administrator) jest realizowane przez administratora.
+    -	Logowanie odbywa się poprzez formularz zintegrowany z bazą danych.
+    -	Hasła użytkowników są szyfrowane.
+2. Zmiana hasła
+    -	Każdy użytkownik może zmienić swoje hasło w profilu.
+    -	Proces zmiany hasła wymaga podania aktualnego hasła oraz wprowadzenia nowego.
+3. Zarządzanie użytkownikami (CRUD) dostępne dla administratora
+    -	Dodawanie nowych użytkowników (z automatycznym szyfrowaniem hasła przed zapisaniem do bazy danych).
+    -	Usuwanie istniejących użytkowników.
+    -	Modyfikacja danych użytkowników, takich jak imię, nazwisko, hasło, e-mail czy rola.
+    -	Wyświetlanie listy wszystkich użytkowników w tabeli z funkcją paginacji.
+4. Poziomy uprawnień
+    -	Student: Może wyświetlić otrzymane od nauczycieli oceny.
+    -	Lecturer: Może wpisywać oceny dla studentów, zarządzać ich widocznością oraz wyświetlić wystawione już oceny.
+    -	Administrator: Pełen dostęp do zarządzania użytkownikami oraz usuwania ocen.
+5. Walidacja danych w formularzach
+    -	Wszystkie formularze w systemie posiadają walidację danych.
+    -	Sprawdzanie wypełnienia wymaganych pól.
+    -	Wyświetlanie komunikatów o błędach.
+      
+6. Funkcjonalności powiązane z ocenami
+  -	Lecturer:
+    -	Wprowadzanie ocen dla uczniów.
+    -	Modyfikacja statusu widoczności ocen.
+    -	Wyświetlanie wystawionych ocen z funkcją paginacji..
+  -	Student:
+    -	Wyświetlanie otrzymanych ocen z funkcją paginacji.
+  -	Administrator:
+    -	Usuwanie ocen.
+    -	Wyświetlanie wszystkich ocen w bazie z funkcją paginacji.
+    -	Wprowadzanie ocen dla uczniów.
 
 ## About Laravel
 
